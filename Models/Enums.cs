@@ -40,6 +40,8 @@ namespace ProjektSchronisko.Models
         [Display(Name = "Owczarek Niemiecki")]
         GermanShepherd,
         [Display(Name = "Inny")]
-        Other
+        Other,
+        [Display(Name = "Border Collie")]
+        BorderCollie
     }
 }
