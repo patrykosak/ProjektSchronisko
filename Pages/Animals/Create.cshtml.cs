@@ -15,10 +15,13 @@ namespace ProjektSchronisko.Pages.Animals
     {
         private readonly ProjektSchronisko.AppData.AnimalsContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public CreateModel(ProjektSchronisko.AppData.AnimalsContext context)
+        public CreateModel(ProjektSchronisko.AppData.AnimalsContext context, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -36,7 +39,8 @@ namespace ProjektSchronisko.Pages.Animals
             {
                 return Page();
             }
-            Animal.AdderId = _userManager.GetUserId(User);
+            if (_signInManager.IsSignedIn(User))
+                Animal.AdderId = _userManager.GetUserId(User);
             _context.Animals.Add(Animal);
 
             await _context.SaveChangesAsync();
