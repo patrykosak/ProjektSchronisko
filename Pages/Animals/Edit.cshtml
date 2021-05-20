@@ -38,13 +38,11 @@
                 <span asp-validation-for="Animal.RaceAnimal" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Photo" class="col-sm-2 col-form-label">Zdjęcie</label>
                 <div class="col-sm-10">
                     <div class="custom-file">
-                        @*Photo property type is IFormFile, so ASP.NET Core
-                    automatically creates a FileUpload control  *@
                         <input asp-for="Photo" class="custom-file-input form-control">
-                        <label class="custom-file-label">Click here to change photo</label>
+                        <label class="custom-file-label">Naciśnij żeby zmienić zdjęcie</label>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ namespace ProjektSchronisko.Models
         [Key]
         public Guid IdAnimal { get; set; }
         [MaxLength(40)]
-        [Display(Name="Imie")]
+        [Display(Name="Imię")]
         public string Name { get; set; }
         [Required]
         [Display(Name = "Gatunek")]
