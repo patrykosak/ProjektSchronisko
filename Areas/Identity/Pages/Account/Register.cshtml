@@ -1,0 +1,152 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h3 class="text-info pt-2 pb-3">Najbardziej niezmiennym i ważnym pytaniem życia jest: Co robisz dla innych?</h3>
+
+<div class="row backgroundWhite border">
+
+    <div class="col-md-8">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.Name">Imię</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.Name" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.Surname">Nazwisko</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.Surname" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.Age">Wiek</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.Age" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.Age" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.Email"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.Email" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.PhoneNumber">Numer kontaktowy</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.PhoneNumber" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.Address">Adres</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.Address" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.City">Miejscowość</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.City" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.City" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.PostalCode">Kod pocztowy</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.PostalCode" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.Password">Hasło</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.Password" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label asp-for="Input.ConfirmPassword">Potwierdź hasło</label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+
+                    </div>
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-success form-control">Zostań wolontariuszem</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
