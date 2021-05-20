@@ -19,9 +19,10 @@ namespace ProjektSchronisko.Pages.Animals
             _context = context;
         }
         public string NameSort { get; set; }
-        public string DateSort { get; set; }
+        public string TypeSort { get; set; }
         public string AgeSort { get; set; }
         public string RaceSort { get; set; }
+        public string DateSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public IList<Animal> Animal { get;set; }
@@ -29,9 +30,10 @@ namespace ProjektSchronisko.Pages.Animals
         public async Task OnGetAsync(string sortOrder)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
             AgeSort = sortOrder == "Age" ? "age_desc" : "Age";
             RaceSort = sortOrder == "Race" ? "race_desc" : "Race";
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
             IQueryable<Animal> animalIQ = from s in _context.Animals
                                             select s;
 
@@ -40,10 +42,10 @@ namespace ProjektSchronisko.Pages.Animals
                 case "name_desc":
                     animalIQ = animalIQ.OrderByDescending(s => s.Name);
                     break;
-                case "Date":
+                case "Type":
                     animalIQ = animalIQ.OrderBy(s => s.TypeAnimale);
                     break;
-                case "date_desc":
+                case "type_desc":
                     animalIQ = animalIQ.OrderByDescending(s => s.TypeAnimale);
                     break;
                 case "Age":
@@ -58,8 +60,14 @@ namespace ProjektSchronisko.Pages.Animals
                 case "race_desc":
                     animalIQ = animalIQ.OrderByDescending(s => s.RaceAnimal);
                     break;
+                case "Date":
+                    animalIQ = animalIQ.OrderBy(s => s.AddDate);
+                    break;
+                case "date_desc":
+                    animalIQ = animalIQ.OrderByDescending(s => s.AddDate);
+                    break;
                 default:
-                    animalIQ = animalIQ.OrderBy(s => s.Name);
+                    animalIQ = animalIQ.OrderBy(s => s.AddDate);
                     break;
             }
             Animal = await animalIQ.AsNoTracking().ToListAsync();

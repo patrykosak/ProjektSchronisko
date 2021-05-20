@@ -41,6 +41,7 @@ namespace ProjektSchronisko.Pages.Animals
             }
             if (_signInManager.IsSignedIn(User))
                 Animal.AdderId = _userManager.GetUserId(User);
+            Animal.AddDate = DateTime.Now;
             _context.Animals.Add(Animal);
 
             await _context.SaveChangesAsync();
