@@ -56,30 +56,34 @@ namespace ProjektSchronisko.Pages.Animals
             {
                 return Page();
             }
-
-            var FileUpload = Path.Combine(_IHostingEnvironment.WebRootPath, "Images", Photo.FileName);
-            using (var Fs = new FileStream(FileUpload, FileMode.Create))
+            if (Photo != null)
             {
-                Animal.PhotoPath = Photo.FileName;
-                await Photo.CopyToAsync(Fs);
-            }
-            _context.Attach(Animal).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AnimalExists(Animal.IdAnimal))
+                var FileUpload = Path.Combine(_IHostingEnvironment.WebRootPath, "Images", Photo.FileName);
+                using (var Fs = new FileStream(FileUpload, FileMode.Create))
                 {
-                    return NotFound();
+                    Animal.PhotoPath = Photo.FileName;
+                    await Photo.CopyToAsync(Fs);
                 }
-                else
+                _context.Attach(Animal).State = EntityState.Modified;
+                try
                 {
-                    throw;
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AnimalExists(Animal.IdAnimal))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
-
+            else {
+                _context.Attach(Animal).State = EntityState.Modified;
+            }
             return RedirectToPage("./Index");
         }
 

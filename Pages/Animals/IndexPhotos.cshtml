@@ -4,11 +4,10 @@
 }
 <style>
     .btn {
-        width: 75px;
+        width: 85px;
     }
 </style>
 
-<h1>Employees</h1>
 <p>
     <a asp-page="Index">Zmień wygląd</a>
 </p><div class="card-deck">
@@ -24,9 +23,9 @@
                  asp-append-version="true" />
 
             <div class="card-footer text-center">
-                <a href="#" class="btn btn-primary m-1">View</a>
-                <a href="#" class="btn btn-primary m-1">Edit</a>
-                <a href="#" class="btn btn-danger m-1">Delete</a>
+                <a asp-page="./Details" asp-route-id="@animal.IdAnimal" class="btn btn-primary m-1">Podgląd</a>
+                <a asp-page="./Edit" asp-route-id="@animal.IdAnimal" class="btn btn-primary m-1">Edytuj</a>
+                <a asp-page="./Delete" asp-route-id="@animal.IdAnimal" class="btn btn-danger m-1">Usuń</a>
             </div>
         </div>
     }
