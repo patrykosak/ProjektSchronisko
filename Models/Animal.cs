@@ -22,5 +22,6 @@ namespace ProjektSchronisko.Models
         [Display(Name = "Rasa")]
         public Race RaceAnimal { get; set; }
         public DateTime AddDate { get; set; }
+        public string PhotoPath { get; set; }
     }
 }
