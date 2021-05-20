@@ -9,11 +9,12 @@
 </style>
 
 <h1>Employees</h1>
-
-<div class="card-deck">
+<p>
+    <a asp-page="Index">Zmień wygląd</a>
+</p><div class="card-deck">
     @foreach (var animal in Model.Animals)
     {
-        var photoPath = "~/images/" + (animal.PhotoPath ?? "noimage.jpg");
+        var photoPath = "~/Images/" + (animal.PhotoPath ?? "noimage.jpg");
         <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
             <div class="card-header">
                 <h3>@animal.Name</h3>

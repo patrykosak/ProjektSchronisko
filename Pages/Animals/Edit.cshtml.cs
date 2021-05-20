@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Web.Helpers;
 using ProjektSchronisko.AppData;
 using ProjektSchronisko.Models;
 
@@ -18,10 +19,12 @@ namespace ProjektSchronisko.Pages.Animals
     {
         private readonly ProjektSchronisko.AppData.AnimalsContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public EditModel(ProjektSchronisko.AppData.AnimalsContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly IHostingEnvironment _IHostingEnvironment;
+        public EditModel(ProjektSchronisko.AppData.AnimalsContext context, IWebHostEnvironment webHostEnvironment, IHostingEnvironment IHostingEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _IHostingEnvironment = IHostingEnvironment;
         }
 
         [BindProperty]
@@ -53,22 +56,14 @@ namespace ProjektSchronisko.Pages.Animals
             {
                 return Page();
             }
-            if (Photo != null)
+
+            var FileUpload = Path.Combine(_IHostingEnvironment.WebRootPath, "Images", Photo.FileName);
+            using (var Fs = new FileStream(FileUpload, FileMode.Create))
             {
-                // If a new photo is uploaded, the existing photo must be
-                // deleted. So check if there is an existing photo and delete
-                if (Animal.PhotoPath != null)
-                {
-                    string filePath = Path.Combine(_webHostEnvironment.WebRootPath,
-                        "images", Animal.PhotoPath);
-                    System.IO.File.Delete(filePath);
-                }
-                // Save the new photo in wwwroot/images folder and update
-                // PhotoPath property of the employee object
-                Animal.PhotoPath = ProcessUploadedFile();
+                Animal.PhotoPath = Photo.FileName;
+                await Photo.CopyToAsync(Fs);
             }
             _context.Attach(Animal).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -91,23 +86,6 @@ namespace ProjektSchronisko.Pages.Animals
         private bool AnimalExists(Guid id)
         {
             return _context.Animals.Any(e => e.IdAnimal == id);
-        }
-        private string ProcessUploadedFile()
-        {
-            string uniqueFileName = null;
-
-            if (Photo != null)
-            {
-                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    Photo.CopyTo(fileStream);
-                }
-            }
-
-            return uniqueFileName;
         }
     }
 }

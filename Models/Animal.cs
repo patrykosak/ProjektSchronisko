@@ -21,6 +21,7 @@ namespace ProjektSchronisko.Models
         public String AdderId { get; set; }
         [Display(Name = "Rasa")]
         public Race RaceAnimal { get; set; }
+        [Display(Name = "Data dodania")]
         public DateTime AddDate { get; set; }
         public string PhotoPath { get; set; }
     }
