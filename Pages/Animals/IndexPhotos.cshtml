@@ -8,9 +8,19 @@
     }
 </style>
 
+
 <p>
     <a asp-page="Index">Zmień wygląd</a>
-</p><div class="card-deck">
+</p>
+<form method="get">
+    <div class="input-group">
+        <input class="form-control" asp-for="SearchTerm" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Szukaj</button>
+        </div>
+    </div>
+</form>
+<div class="card-deck">
     @foreach (var animal in Model.Animals)
     {
         var photoPath = "~/Images/" + (animal.PhotoPath ?? "noimage.jpg");

@@ -26,8 +26,11 @@ namespace ProjektSchronisko.Pages.Animals
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public IList<Animal> Animal { get;set; }
-
-        public async Task OnGetAsync(string sortOrder)
+        public string SearchTerm { get; set; }
+        public TypeAnimal type { get; set; }
+        public Age age { get; set; }
+        public Race race { get; set; }
+        public async Task OnGetAsync(string sortOrder, string SearchTerm, TypeAnimal type, Age age, Race race)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
@@ -35,7 +38,7 @@ namespace ProjektSchronisko.Pages.Animals
             RaceSort = sortOrder == "Race" ? "race_desc" : "Race";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
             IQueryable<Animal> animalIQ = from s in _context.Animals
-                                            select s;
+                                          select s;
 
             switch (sortOrder)
             {
@@ -70,7 +73,15 @@ namespace ProjektSchronisko.Pages.Animals
                     animalIQ = animalIQ.OrderBy(s => s.AddDate);
                     break;
             }
-            Animal = await animalIQ.AsNoTracking().ToListAsync();
+            if (string.IsNullOrEmpty(SearchTerm))
+                Animal = await animalIQ.AsNoTracking().ToListAsync();
+            else {
+                Animal = animalIQ.ToList().Where(e => e.Name.ToUpper().Contains(SearchTerm.ToUpper()) &&
+                e.AgeAnimal.Equals(age)&&
+                e.RaceAnimal.Equals(race)&&
+                e.TypeAnimale.Equals(type)
+                ).ToList();
+            }
         }
     }
 }
