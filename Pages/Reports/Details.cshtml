@@ -1,0 +1,47 @@
+﻿@page
+@model ProjektSchronisko.Pages.Reports.DetailsModel
+@{
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Report</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAnimal.TypeReport)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAnimal.TypeReport)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAnimal.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAnimal.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAnimal.Street)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAnimal.Street)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAnimal.AnimalName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAnimal.AnimalName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAnimal.AddDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAnimal.AddDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ReportAnimal.IdReport">Edit</a> |
+    <a asp-page="./ReportAboutLossOfPet">Back to List</a>
+</div>

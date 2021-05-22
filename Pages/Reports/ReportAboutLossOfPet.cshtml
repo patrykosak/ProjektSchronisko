@@ -2,3 +2,38 @@
 @model ProjektSchronisko.Pages.Reports.ReportAboutLossOfPetModel
 @{
 }
+<style>
+    .btn {
+        width: 85px;
+    }
+</style>
+
+<form method="get">
+    <div class="input-group">
+        <input class="form-control" asp-for="SearchTerm" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Szukaj</button>
+        </div>
+    </div>
+</form>
+
+<div class="card-deck">
+    @foreach (var report in Model.ReportsAnimal)
+    {
+        var photoPath = "~/Images/" + (report.PhotoPath ?? "noimage.jpg");
+        <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
+            <div class="card-header">
+                <h3>@report.AnimalName</h3>
+            </div>
+
+            <img class="card-img-top imageThumbnail" src="@photoPath"
+                 asp-append-version="true" />
+
+            <div class="card-footer text-center">
+                <a asp-page="./Details" asp-route-id="@report.IdReport" class="btn btn-primary m-1">Podgląd</a>
+                <a asp-page="./Edit" asp-route-id="@report.IdReport" class="btn btn-primary m-1">Edytuj</a>
+                <a asp-page="./Delete" asp-route-id="@report.IdReport" class="btn btn-danger m-1">Usuń</a>
+            </div>
+        </div>
+    }
+</div>
