@@ -14,5 +14,6 @@ namespace ProjektSchronisko.AppData
 
         }
         public DbSet<Animal> Animals { get; set; }
+        public DbSet<ReportAnimal> ReportAnimal { get; set; }
     }
 }

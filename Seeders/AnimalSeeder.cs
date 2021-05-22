@@ -50,7 +50,7 @@ namespace ProjektSchronisko.Seeders
                     AgeAnimal = Age.Months612,
                     RaceAnimal = Race.GermanShepherd,
                     AddDate = DateTime.UtcNow,
-                    //PhotoPath = 
+                    PhotoPath = "20210512_135535.jpg"
                 },
                 new Animal()
                 {
@@ -59,7 +59,7 @@ namespace ProjektSchronisko.Seeders
                     AgeAnimal = Age.Year,
                     RaceAnimal = Race.Dachshund,
                     AddDate = DateTime.UtcNow,
-                    //PhotoPath = 
+                    PhotoPath = "20210512_135547.jpg"
                 },
                 new Animal()
                 {
@@ -68,7 +68,7 @@ namespace ProjektSchronisko.Seeders
                     AgeAnimal = Age.Older,
                     RaceAnimal = Race.Other,
                     AddDate = DateTime.UtcNow,
-                    //PhotoPath = 
+                    PhotoPath = "20210410_105623.jpg"
                 }
             };
             return animals;

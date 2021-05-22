@@ -44,4 +44,13 @@ namespace ProjektSchronisko.Models
         [Display(Name = "Border Collie")]
         BorderCollie
     }
+    public enum TypeReport
+    {
+        [Display(Name = "Zaniedbane zwierzę")]
+        NeglectedPet,
+        [Display(Name = "Zagubienie zwierzę")]
+        LossOfPet,
+        [Display(Name = "Błąkające zwierzę ")]
+        WanderingPet
+    }
 }

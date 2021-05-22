@@ -15,19 +15,19 @@ namespace ProjektSchronisko.Pages.Animals
         public string SearchTerm { get; set; }
 
         public IndexPhotosModel(AppData.AnimalsContext context)
-    {
+        {
             _context = context;
-    }
+        }
 
-    public void OnGet(string SearchTerm)
-    {
+        public void OnGet(string SearchTerm)
+        {
             if (string.IsNullOrEmpty(SearchTerm))
                 Animals = _context.Animals.ToList();
             else
             {
                 Animals = _context.Animals.ToList().Where(e => e.Name.ToUpper().Contains(SearchTerm.ToUpper()));
             }
-            }
-}
+        }
+    }
 }
 

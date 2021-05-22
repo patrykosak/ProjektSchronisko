@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjektSchronisko.AppData;
 
 namespace ProjektSchronisko.Migrations
 {
     [DbContext(typeof(AnimalsContext))]
-    partial class AnimalsContextModelSnapshot : ModelSnapshot
+    [Migration("20210522134025_AddingReportAnimalTable")]
+    partial class AddingReportAnimalTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
