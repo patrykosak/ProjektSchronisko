@@ -1,12 +1,14 @@
 ﻿@page
-@model ProjektSchronisko.Pages.Reports.DetailsModel
+@model ProjektSchronisko.Pages.Reports.DeleteModel
 @{
 }
 
-<h1>Szczegóły</h1>
+<h1>Usuń</h1>
+
+<h3>Jesteś pewny że chcesz usunąć te zgłoszenie?</h3>
 
 <div>
-    <h4>Zgłoszenia</h4>
+    <h4>Zgłoszenie</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -40,8 +42,11 @@
             @Html.DisplayFor(model => model.ReportAnimal.AddDate)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.ReportAnimal.IdReport">Edytuj</a> |
-    <a asp-page="./ReportAboutLossOfPet">Wróć do zgłoszeń</a>
+
+    <form method="post">
+        <input type="hidden" asp-for="ReportAnimal.IdReport" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Wróć do zgłoszeń</a>
+    </form>
+
 </div>

@@ -1,0 +1,66 @@
+﻿@page
+@model ProjektSchronisko.Pages.Reports.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+@using ProjektSchronisko.Models
+<h1>Stwórz nowe zgłoszenie</h1>
+
+<h4>Formularz zgłoszenia</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReportAnimal.TypeReport" class="control-label"></label>
+                <select asp-for="ReportAnimal.TypeReport" class="form-control" asp-items="Html.GetEnumSelectList<TypeReport>()"></select>
+                <span asp-validation-for="ReportAnimal.TypeReport" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportAnimal.City" class="control-label"></label>
+                <input asp-for="ReportAnimal.City" class="form-control" />
+                <span asp-validation-for="ReportAnimal.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportAnimal.Street" class="control-label"></label>
+                <input asp-for="ReportAnimal.Street" class="form-control" />
+                <span asp-validation-for="ReportAnimal.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReportAnimal.AnimalName" class="control-label"></label>
+                <input asp-for="ReportAnimal.AnimalName" class="form-control" />
+                <span asp-validation-for="ReportAnimal.AnimalName" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Photo" class="col-sm-2 col-form-label">Zdjęcie</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input asp-for="Photo" class="custom-file-input form-control">
+                        <label class="custom-file-label">Naciśnij żeby zmienić zdjęcie</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Wyślij zgłoszenie" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./ReportAboutLossOfPet">Wróć do listy</a>
+</div>
+
+@section Scripts {
+    <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
