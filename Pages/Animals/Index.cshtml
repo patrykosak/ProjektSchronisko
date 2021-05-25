@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <label asp-for="type" class="control-label"></label>
-        <select asp-for="type" class="form-control" asp-items="Html.GetEnumSelectList<TypeAnimal>()"></select>
+        <select asp-for="type" class="form-control" asp-items="Html.GetEnumSelectList<TypeAnimal>()"> <option value="2">wybierz</option></select>
         <span asp-validation-for="type" class="text-danger"></span>
     </div>
     <div class="form-group">

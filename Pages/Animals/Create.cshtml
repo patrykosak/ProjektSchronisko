@@ -44,6 +44,11 @@
                 </div>
             </div>
             <div class="form-group">
+                <label asp-for="Animal.PhotoPathURL" class="control-label"></label>
+                <input asp-for="Animal.PhotoPathURL" class="form-control" />
+                <span asp-validation-for="Animal.PhotoPathURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

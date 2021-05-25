@@ -24,5 +24,7 @@ namespace ProjektSchronisko.Models
         [Display(Name = "Data dodania")]
         public DateTime AddDate { get; set; }
         public string PhotoPath { get; set; }
+        public string PhotoPathURL { get; set; }
+
     }
 }
