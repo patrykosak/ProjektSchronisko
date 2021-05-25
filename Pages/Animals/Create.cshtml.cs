@@ -57,7 +57,7 @@ namespace ProjektSchronisko.Pages.Animals
                 var FileUpload = Path.Combine(_IHostingEnvironment.WebRootPath, "Images", Photo.FileName);
                 using (var Fs = new FileStream(FileUpload, FileMode.Create))
                 {
-                    Animal.PhotoPath = Photo.FileName;
+                    Animal.PhotoPath = "/Images/"+Photo.FileName;
                     await Photo.CopyToAsync(Fs);
                 }
                 _context.Animals.Add(Animal);
