@@ -13,15 +13,25 @@
 <div class="card-footer text-center">
     <a asp-page="./Create" class="btn btn-primary m-1">Zgłoś!</a>
 </div>
+<hr />
+
+<div class="text-center">
+    <h6 class="display-4">Witaj</h6>
+    <p>Tutaj znajdziesz poszukiwane zwierzęta</p>
+    <hr />
+</div>
+
 
 <form method="get">
     <div class="input-group">
+        <p>Wpisz miasto:  </p>
         <input class="form-control" asp-for="SearchTerm" />
         <div class="input-group-append">
             <button type="submit" class="btn btn-primary">Szukaj</button>
         </div>
     </div>
 </form>
+
 
 <div class="card-deck">
     @foreach (var report in Model.ReportsAnimal)

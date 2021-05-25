@@ -20,7 +20,7 @@ namespace ProjektSchronisko.Pages.Reports
             _context = context;
         }
 
-        public void OnGet(string SearchTerm)
+        public void OnGet(string SearchTerm, int pageIndex = 1)
         {
             var queryLossOfPet = _context.ReportAnimal
                 .Where(r => r.TypeReport == TypeReport.LossOfPet);
@@ -29,8 +29,9 @@ namespace ProjektSchronisko.Pages.Reports
                 ReportsAnimal = queryLossOfPet.ToList();
             else
             {
-                ReportsAnimal = queryLossOfPet
+                var queryLossOfPetWithSearchTerm = queryLossOfPet
                     .Where(r => r.City.ToLower().Contains(SearchTerm.ToLower()));
+                ReportsAnimal = queryLossOfPetWithSearchTerm.ToList();
             }
         }
     }

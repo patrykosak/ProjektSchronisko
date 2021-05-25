@@ -9,17 +9,22 @@
     <h4>Zgłoszenia</h4>
     <hr />
 
-    <div class="row">
+    <div class="text-center">
+        <h4 class="display-4">Cześć mam na imię</h4>
+        <h6><font size="5"><b><i>@Model.ReportAnimal.AnimalName</i></b></font></h6>
+        <hr />
+    </div>
+
+    <div class="text-center">
 
         @{
             var photoPath = "~/Images/" + (Model.ReportAnimal.PhotoPath ?? "noimage.jpg");
-
-            <label>Cześć mam na imię </label>
-            <a> @Html.DisplayFor(model => model.ReportAnimal.AnimalName)</a>
         }
-        <img class="card-img-top imageThumbnail" src="@photoPath"
+        <img class="card-img-top imageThumbnail" src="@photoPath" width="350" height="350"
              asp-append-version="true" />
     </div>
+    <hr />
+
 
 
 
