@@ -14,7 +14,7 @@
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ReportAnimal.TypeReport" class="control-label"></label>
+                <label class="control-label">Rodzaj zgłoszenia</label>
                 <select asp-for="ReportAnimal.TypeReport" class="form-control" asp-items="Html.GetEnumSelectList<TypeReport>()"></select>
                 <span asp-validation-for="ReportAnimal.TypeReport" class="text-danger"></span>
             </div>

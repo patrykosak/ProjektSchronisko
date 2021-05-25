@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjektSchronisko.AppData;
 using ProjektSchronisko.Data;
+using ProjektSchronisko.Middleware;
 using ProjektSchronisko.Seeders;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,9 @@ namespace ProjektSchronisko
 
             services.AddScoped<AnimalSeeder>();
 
+            services.AddScoped<ErrorHandlingMiddleware>();
+            services.AddScoped<RequestTimeMiddleware>();
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
@@ -60,6 +64,8 @@ namespace ProjektSchronisko
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseErrorHandlingMiddleware();
+            app.UseRequestTimeMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

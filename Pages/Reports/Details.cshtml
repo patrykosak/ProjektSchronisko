@@ -8,6 +8,24 @@
 <div>
     <h4>Zgłoszenia</h4>
     <hr />
+
+    <div class="row">
+
+        @{
+            var photoPath = "~/Images/" + (Model.ReportAnimal.PhotoPath ?? "noimage.jpg");
+
+            <label>Cześć mam na imię </label>
+            <a> @Html.DisplayFor(model => model.ReportAnimal.AnimalName)</a>
+        }
+        <img class="card-img-top imageThumbnail" src="@photoPath"
+             asp-append-version="true" />
+    </div>
+
+
+
+
+
+
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ReportAnimal.TypeReport)
