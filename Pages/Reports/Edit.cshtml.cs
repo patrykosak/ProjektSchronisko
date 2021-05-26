@@ -18,19 +18,16 @@ namespace ProjektSchronisko.Pages.Reports
     {
         private readonly AnimalsContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly IHostingEnvironment _IHostingEnvironment;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
         public EditModel(AnimalsContext context, SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment,
-            IHostingEnvironment IHostingEnvironment)
+            UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
-            _IHostingEnvironment = IHostingEnvironment;
         }
         [BindProperty]
         public ReportAnimal ReportAnimal { get; set; }
@@ -61,7 +58,7 @@ namespace ProjektSchronisko.Pages.Reports
             }
             if (Photo != null)
             {
-                var FileUpload = Path.Combine(_IHostingEnvironment.WebRootPath, "Images", Photo.FileName);
+                var FileUpload = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Photo.FileName);
                 using (var Fs = new FileStream(FileUpload, FileMode.Create))
                 {
                     ReportAnimal.PhotoPath = Photo.FileName;

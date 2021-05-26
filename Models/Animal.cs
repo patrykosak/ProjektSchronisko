@@ -23,7 +23,9 @@ namespace ProjektSchronisko.Models
         public Race RaceAnimal { get; set; }
         [Display(Name = "Data dodania")]
         public DateTime AddDate { get; set; }
+        [Display(Name = "Zdjęcie")]
         public string PhotoPath { get; set; }
+        [Display(Name = "Link do zdjęcia")]
         public string PhotoPathURL { get; set; }
 
     }
