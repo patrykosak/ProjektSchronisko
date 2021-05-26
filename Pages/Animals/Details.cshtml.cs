@@ -20,7 +20,7 @@ namespace ProjektSchronisko.Pages.Animals
         }
 
         public Animal Animal { get; set; }
-
+        public Boolean ifShow { get; set; } = false;
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)

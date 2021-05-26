@@ -12,9 +12,9 @@ namespace ProjektSchronisko.Pages.Animals
 {
     public class IndexModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
+        private readonly AnimalsContext _context;
 
-        public IndexModel(ProjektSchronisko.AppData.AnimalsContext context)
+        public IndexModel(AnimalsContext context)
         {
             _context = context;
         }
@@ -26,11 +26,12 @@ namespace ProjektSchronisko.Pages.Animals
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public IList<Animal> Animal { get;set; }
-        public string SearchTerm { get; set; }
         public TypeAnimal type { get; set; }
         public Age age { get; set; }
         public Race race { get; set; }
-        public async Task OnGetAsync(string sortOrder, string SearchTerm, TypeAnimal type, Age age, Race race)
+        public Boolean search { get; set; } = false;
+
+        public async Task OnGetAsync(string sortOrder,TypeAnimal type, Age age, Race race, Boolean search)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
@@ -73,10 +74,10 @@ namespace ProjektSchronisko.Pages.Animals
                     animalIQ = animalIQ.OrderBy(s => s.AddDate);
                     break;
             }
-            if (string.IsNullOrEmpty(SearchTerm))
                 Animal = await animalIQ.AsNoTracking().ToListAsync();
-            else {
-                Animal = animalIQ.ToList().Where(e => e.Name.ToUpper().Contains(SearchTerm.ToUpper()) &&
+            if (search)
+            {
+                Animal = animalIQ.ToList().Where(e =>
                 e.AgeAnimal.Equals(age)&&
                 e.RaceAnimal.Equals(race)&&
                 e.TypeAnimale.Equals(type)

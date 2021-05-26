@@ -17,14 +17,12 @@ namespace ProjektSchronisko.Pages.Animals
 {
     public class EditModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
+        private readonly AnimalsContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly IHostingEnvironment _IHostingEnvironment;
-        public EditModel(ProjektSchronisko.AppData.AnimalsContext context, IWebHostEnvironment webHostEnvironment, IHostingEnvironment IHostingEnvironment)
+        public EditModel(AnimalsContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
-            _IHostingEnvironment = IHostingEnvironment;
         }
 
         [BindProperty]
@@ -58,7 +56,7 @@ namespace ProjektSchronisko.Pages.Animals
             }
             if (Photo != null)
             {
-                var FileUpload = Path.Combine(_IHostingEnvironment.WebRootPath, "Images", Photo.FileName);
+                var FileUpload = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Photo.FileName);
                 using (var Fs = new FileStream(FileUpload, FileMode.Create))
                 {
                     Animal.PhotoPath = Photo.FileName;
