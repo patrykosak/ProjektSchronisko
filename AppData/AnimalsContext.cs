@@ -16,5 +16,7 @@ namespace ProjektSchronisko.AppData
         public DbSet<Animal> Animals { get; set; }
         public DbSet<ReportAnimal> ReportAnimal { get; set; }
         public DbSet<WorkHours> WorkHours { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
     }
 }
