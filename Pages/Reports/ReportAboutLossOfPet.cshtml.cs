@@ -20,7 +20,7 @@ namespace ProjektSchronisko.Pages.Reports
             _context = context;
         }
 
-        public void OnGet(string SearchTerm, int pageIndex = 1)
+        public void OnGet(string SearchTerm)
         {
             var queryLossOfPet = _context.ReportAnimal
                 .Where(r => r.TypeReport == TypeReport.LossOfPet);

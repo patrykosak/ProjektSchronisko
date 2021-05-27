@@ -8,6 +8,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {
+        public static string Reports => "Reports";
         public static string FindNotifications => "FindNotifications";
         public static string Index => "Index";
 
@@ -25,6 +26,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
+        public static string ReportsNavClass(ViewContext viewContext) => PageNavClass(viewContext, Reports);
         public static string FindNotificationsNavClass(ViewContext viewContext) => PageNavClass(viewContext, FindNotifications);
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
