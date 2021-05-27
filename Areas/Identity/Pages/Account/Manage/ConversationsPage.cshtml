@@ -1,0 +1,42 @@
+﻿@page
+@model ProjektSchronisko.Areas.Identity.Pages.Account.Manage.ConversationsPageModel
+@{
+    ViewData["Title"] = "Konwersacje";
+    ViewData["ActivePage"] = ManageNavPages.ConversationsPage;
+}
+
+<div class="text-center">
+    <h3 class="text-info pt-2 pb-3">Twoje konwersacje</h3>
+</div>
+<hr />
+
+<form method="get">
+    <div class="input-group">
+        <p>Wpisz E-mail:  </p>
+        <input class="form-control" asp-for="SearchTerm" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Szukaj</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="card-deck">
+    @foreach (var conversation in Model.Conversations)
+    {
+
+        <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
+
+            <img class="card-img-top imageThumbnail" src="https://av.fotosik.pl/default-light.png"
+                 asp-append-version="true" />
+            <div class="card-header">
+                <h3>n</h3>
+            </div>
+
+            <div class="card-footer text-center">
+                <a asp-page="./MessagesPage" asp-route-id="@conversation.Id" class="btn btn-primary m-1">Podgląd</a>
+
+            </div>
+        </div>
+    }
+</div>

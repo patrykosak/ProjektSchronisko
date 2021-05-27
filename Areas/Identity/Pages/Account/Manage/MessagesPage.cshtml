@@ -1,0 +1,31 @@
+﻿@page
+@model ProjektSchronisko.Areas.Identity.Pages.Account.Manage.MessagesPageModel
+@{
+}
+
+
+<div>
+    <a asp-page="./ConversationsPage">Wróć do listy</a>
+</div>
+
+
+<div class="row">
+
+    @foreach (var message in Model.Messages)
+    {
+        if (message.From == Model.UserId)
+        {
+            <div class="col-sm-10">
+                <snap style="color: teal">@Html.DisplayFor(model => message.MessageU)</snap>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-10">
+                <snap style="color: gray">@Html.DisplayFor(model => message.MessageU)</snap>
+            </div>
+        }
+
+
+    }
+</div>

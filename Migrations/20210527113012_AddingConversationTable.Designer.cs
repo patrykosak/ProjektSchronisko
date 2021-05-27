@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjektSchronisko.AppData;
 
 namespace ProjektSchronisko.Migrations
 {
     [DbContext(typeof(AnimalsContext))]
-    partial class AnimalsContextModelSnapshot : ModelSnapshot
+    [Migration("20210527113012_AddingConversationTable")]
+    partial class AddingConversationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +63,6 @@ namespace ProjektSchronisko.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid>("User1Id")
                         .HasColumnType("uniqueidentifier");
 
@@ -81,17 +80,13 @@ namespace ProjektSchronisko.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ConversationId")
+                    b.Property<Guid?>("ConversationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("From")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MessageU")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -160,13 +155,9 @@ namespace ProjektSchronisko.Migrations
 
             modelBuilder.Entity("ProjektSchronisko.Models.Message", b =>
                 {
-                    b.HasOne("ProjektSchronisko.Models.Conversation", "Conversation")
+                    b.HasOne("ProjektSchronisko.Models.Conversation", null)
                         .WithMany("Messages")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conversation");
+                        .HasForeignKey("ConversationId");
                 });
 
             modelBuilder.Entity("ProjektSchronisko.Models.Conversation", b =>
