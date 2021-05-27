@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjektSchronisko.AppData;
 using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.WorkHoursAndDays
 {
-    [Authorize]
     public class CreateModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
-        private readonly UserManager<VolunteerUser> _userManager;
+        private readonly AnimalsContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public CreateModel(ProjektSchronisko.AppData.AnimalsContext context, UserManager<VolunteerUser> userManager)
-        {
+        public CreateModel(AnimalsContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult OnGet()
@@ -36,10 +33,9 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
-               // WorkHours.VolonteerId = (Guid)_userManager.GetUserId(User);
-                return Page();
-            }
+                    return Page();
+            if(_signInManager.IsSignedIn(User))
+                WorkHours.VolonteerId = Guid.Parse(_userManager.GetUserId(User));
 
             _context.WorkHours.Add(WorkHours);
             await _context.SaveChangesAsync();
