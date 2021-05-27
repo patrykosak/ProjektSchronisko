@@ -1,0 +1,40 @@
+﻿@page
+@model ProjektSchronisko.Pages.WorkHoursAndDays.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>WorkHours</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkHours.From)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WorkHours.From)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkHours.To)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WorkHours.To)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkHours.VolonteerId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WorkHours.VolonteerId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="WorkHours.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

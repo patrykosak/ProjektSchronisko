@@ -90,6 +90,26 @@ namespace ProjektSchronisko.Migrations
 
                     b.ToTable("ReportAnimal");
                 });
+
+            modelBuilder.Entity("ProjektSchronisko.Models.WorkHours", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("To")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VolonteerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkHours");
+                });
 #pragma warning restore 612, 618
         }
     }
