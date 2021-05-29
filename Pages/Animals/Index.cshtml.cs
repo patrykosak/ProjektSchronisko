@@ -29,9 +29,9 @@ namespace ProjektSchronisko.Pages.Animals
         public TypeAnimal type { get; set; }
         public Age age { get; set; }
         public Race race { get; set; }
-        public Boolean search { get; set; } = false;
+        public Boolean Search { get; set; }
 
-        public async Task OnGetAsync(string sortOrder,TypeAnimal type, Age age, Race race, Boolean search)
+        public async Task OnGetAsync(string sortOrder,TypeAnimal type, Age age, Race race, Boolean Search)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
@@ -75,11 +75,11 @@ namespace ProjektSchronisko.Pages.Animals
                     break;
             }
                 Animal = await animalIQ.AsNoTracking().ToListAsync();
-            if (search)
+            if (Search)
             {
                 Animal = animalIQ.ToList().Where(e =>
-                e.AgeAnimal.Equals(age)&&
-                e.RaceAnimal.Equals(race)&&
+                e.AgeAnimal.Equals(age) &&
+                e.RaceAnimal.Equals(race) &&
                 e.TypeAnimale.Equals(type)
                 ).ToList();
             }
