@@ -22,10 +22,11 @@ namespace ProjektSchronisko.Pages.Animals
         public void OnGet(string SearchTerm)
         {
             if (string.IsNullOrEmpty(SearchTerm))
-                Animals = _context.Animals.ToList();
+                Animals = _context.Animals.ToList().Where(e => e.ifAdopted==false);
             else
             {
-                Animals = _context.Animals.ToList().Where(e => e.Name.ToUpper().Contains(SearchTerm.ToUpper()));
+                Animals = _context.Animals.ToList().Where(e => e.Name.ToUpper().Contains(SearchTerm.ToUpper())
+                && e.ifAdopted == false);
             }
         }
     }

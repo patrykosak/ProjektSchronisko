@@ -17,27 +17,27 @@ namespace ProjektSchronisko.Seeders
             _animalsDbContext = animalsDbContext;
         }
         
-        public void Seed()
-        {
-            if (_animalsDbContext.Database.CanConnect())
-            {
-                AutoMigration();
+        //public void Seed()
+        //{
+        //    if (_animalsDbContext.Database.CanConnect())
+        //    {
+        //        AutoMigration();
 
-                if (!_animalsDbContext.Animals.Any())
-                {
-                    var animals = GetAnimals();
-                    _animalsDbContext.Animals.AddRange(animals);
-                    _animalsDbContext.SaveChanges();
-                }
-            }
-        }
+        //        if (!_animalsDbContext.Animals.Any())
+        //        {
+        //            var animals = GetAnimals();
+        //            _animalsDbContext.Animals.AddRange(animals);
+        //            _animalsDbContext.SaveChanges();
+        //        }
+        //    }
+        //}
 
-        private void AutoMigration()
-        {
-            var pendingMigrations = _animalsDbContext.Database.GetPendingMigrations();
-            if (pendingMigrations != null && pendingMigrations.Any())
-                _animalsDbContext.Database.Migrate();
-        }
+        //private void AutoMigration()
+        //{
+        //    var pendingMigrations = _animalsDbContext.Database.GetPendingMigrations();
+        //    if (pendingMigrations != null && pendingMigrations.Any())
+        //        _animalsDbContext.Database.Migrate();
+        //}
 
         private IEnumerable<Animal> GetAnimals()
         {

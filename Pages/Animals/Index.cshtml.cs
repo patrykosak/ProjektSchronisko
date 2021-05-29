@@ -39,6 +39,7 @@ namespace ProjektSchronisko.Pages.Animals
             RaceSort = sortOrder == "Race" ? "race_desc" : "Race";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
             IQueryable<Animal> animalIQ = from s in _context.Animals
+                                          where s.ifAdopted==false
                                           select s;
 
             switch (sortOrder)

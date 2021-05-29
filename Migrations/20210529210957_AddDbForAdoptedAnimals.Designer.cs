@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjektSchronisko.AppData;
 
 namespace ProjektSchronisko.Migrations
 {
     [DbContext(typeof(AnimalsContext))]
-    partial class AnimalsContextModelSnapshot : ModelSnapshot
+    [Migration("20210529210957_AddDbForAdoptedAnimals")]
+    partial class AddDbForAdoptedAnimals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,12 +52,9 @@ namespace ProjektSchronisko.Migrations
                     b.Property<int>("TypeAnimale")
                         .HasColumnType("int");
 
-                    b.Property<bool>("ifAdopted")
-                        .HasColumnType("bit");
-
                     b.HasKey("IdAnimal");
 
-                    b.ToTable("Animals");
+                    b.ToTable("Animal");
                 });
 
             modelBuilder.Entity("ProjektSchronisko.Models.Conversation", b =>
