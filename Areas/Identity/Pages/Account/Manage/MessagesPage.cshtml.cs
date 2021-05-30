@@ -43,7 +43,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
                 return NotFound();
 
             Messages = conversation.Messages
-                .OrderBy(m => m.AddDate);
+                .OrderByDescending(m => m.AddDate);
 
             return Page();
         }

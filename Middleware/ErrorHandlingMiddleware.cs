@@ -9,10 +9,9 @@ namespace ProjektSchronisko.Middleware
 {
     public static class ErrorHandlingMiddlewareExtension
     {
-        public static IApplicationBuilder UseErrorHandlingMiddleware(this IApplicationBuilder builder)
+        public static void ErrorHandlingMiddleware(this IApplicationBuilder builder)
             => builder.UseMiddleware<ErrorHandlingMiddleware>();
     }
-
     public class ErrorHandlingMiddleware : IMiddleware
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -23,7 +22,7 @@ namespace ProjektSchronisko.Middleware
             }
             catch (Exception e)
             {
-                context.Response.StatusCode = 500;
+                //context.Response.StatusCode = 500;
                 await context.Response.WriteAsync("Something went wrong");
             }
         }
