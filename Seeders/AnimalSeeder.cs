@@ -16,7 +16,7 @@ namespace ProjektSchronisko.Seeders
         {
             _animalsDbContext = animalsDbContext;
         }
-        
+
         public void Seed()
         {
             if (_animalsDbContext.Database.CanConnect())
@@ -50,7 +50,8 @@ namespace ProjektSchronisko.Seeders
                     AgeAnimal = Age.Months612,
                     RaceAnimal = Race.GermanShepherd,
                     AddDate = DateTime.UtcNow,
-                    PhotoPath = "/Images/20210512_135535.jpg"
+                    PhotoPath = "/Images/20210512_135535.jpg",
+                    ifAdopted = false
                 },
                 new Animal()
                 {
@@ -59,7 +60,8 @@ namespace ProjektSchronisko.Seeders
                     AgeAnimal = Age.Year,
                     RaceAnimal = Race.Dachshund,
                     AddDate = DateTime.UtcNow,
-                    PhotoPath = "/Images/20210512_135547.jpg"
+                    PhotoPath = "/Images/20210512_135547.jpg",
+                    ifAdopted = false
                 },
                 new Animal()
                 {
@@ -68,7 +70,8 @@ namespace ProjektSchronisko.Seeders
                     AgeAnimal = Age.Older,
                     RaceAnimal = Race.Other,
                     AddDate = DateTime.UtcNow,
-                    PhotoPath = "/Images/20210410_105623.jpg"
+                    PhotoPath = "/Images/20210410_105623.jpg",
+                    ifAdopted = true
                 }
             };
             return animals;

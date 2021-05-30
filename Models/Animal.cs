@@ -27,6 +27,7 @@ namespace ProjektSchronisko.Models
         public string PhotoPath { get; set; }
         [Display(Name = "Link do zdjęcia")]
         public string PhotoPathURL { get; set; }
+        public Boolean ifAdopted { get; set; }
 
     }
 }

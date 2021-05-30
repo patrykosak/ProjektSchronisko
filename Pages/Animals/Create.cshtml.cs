@@ -58,6 +58,7 @@ namespace ProjektSchronisko.Pages.Animals
                     Animal.PhotoPath = "/Images/"+Photo.FileName;
                     await Photo.CopyToAsync(Fs);
                 }
+                Animal.ifAdopted = false;
                 _context.Animals.Add(Animal);
             }
             

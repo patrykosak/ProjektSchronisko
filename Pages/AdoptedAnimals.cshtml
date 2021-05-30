@@ -1,0 +1,39 @@
+﻿@page
+@model ProjektSchronisko.Pages.AdoptedAnimalsModel
+@{
+}
+
+<style>
+    .btn {
+        width: 280px;
+    }
+</style>
+
+<h3 class="text-info pt-2 pb-3">One znalazły już kochający dom</h3>
+
+<div class="card-deck">
+    @foreach (var animal in Model.Animals)
+    {
+        var photoPath = "";
+        if (animal.PhotoPath != null)
+        {
+            photoPath = (animal.PhotoPath ?? "/Images/noimage.jpg");
+        }
+        else
+        {
+            photoPath = (animal.PhotoPathURL ?? "/Images/noimage.jpg");
+        }
+        <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
+            <div class="card-header">
+                <h3>@animal.Name</h3>
+            </div>
+
+            <img class="card-img-top imageThumbnail" src="@photoPath"
+                 asp-append-version="true" />
+
+            <div class="card-footer text-center">
+                <a asp-page="/Animals/Details" asp-route-id="@animal.IdAnimal" class="btn btn-primary m-1">Szczegóły</a>
+            </div>
+        </div>
+    }
+</div>

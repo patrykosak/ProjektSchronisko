@@ -49,7 +49,7 @@ namespace ProjektSchronisko.Pages.Animals
 
             if (Animal != null)
             {
-                _context.Animals.Remove(Animal);
+                Animal.ifAdopted = true;
                 await _context.SaveChangesAsync();
             }
 
