@@ -5,10 +5,16 @@
     ViewData["Title"] = "Index";
 }
 @using Models;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
-<p>
-    <a asp-page="Create">Dodaj ogłoszenie</a>
-</p>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-page="Create">Dodaj ogłoszenie</a>
+    </p>
+}
 <p>
     <a asp-page="IndexPhotos">Zmień wygląd</a>
 </p>
@@ -86,10 +92,16 @@
                     @Html.DisplayFor(modelItem => item.AddDate)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.IdAnimal">Edytuj</a> |
-                    <a asp-page="./Details" asp-route-id="@item.IdAnimal">Szczegóły</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.IdAnimal">Usuń</a>
-                </td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.IdAnimal">Edytuj</a>
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.IdAnimal">Szczegóły</a> 
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.IdAnimal">Usuń</a>
+                    }
+                    </td>
             </tr>
         }
     </tbody>
