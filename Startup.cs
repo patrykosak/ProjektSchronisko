@@ -65,7 +65,7 @@ namespace ProjektSchronisko
                 app.UseHsts();
             }
             //app.UseErrorHandlingMiddleware();
-            app.UseRequestTimeMiddleware();
+            //app.UseRequestTimeMiddleware();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

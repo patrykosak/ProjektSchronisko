@@ -37,25 +37,20 @@ namespace ProjektSchronisko.Pages.Reports
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
 
             if (ReportAnimal == null)
-            {
                 return NotFound();
-            }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
+            
             if (Photo != null)
             {
                 var FileUpload = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Photo.FileName);
@@ -64,14 +59,10 @@ namespace ProjektSchronisko.Pages.Reports
                     ReportAnimal.PhotoPath = Photo.FileName;
                     await Photo.CopyToAsync(Fs);
                 }
-               _context.Attach(ReportAnimal).State = EntityState.Modified;
-               await _context.SaveChangesAsync();
             }
-            else
-            {
-                _context.Attach(ReportAnimal).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-            }
+            _context.Attach(ReportAnimal).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
             return RedirectToPage("./ReportAboutLossOfPet");
         }
     }

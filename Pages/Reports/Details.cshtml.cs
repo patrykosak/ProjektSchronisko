@@ -63,11 +63,11 @@ namespace ProjektSchronisko.Pages.Reports
             if (!ModelState.IsValid)
                 return Page();
 
-            var conversation = await _context.Conversations
-                .FirstOrDefaultAsync(u => (u.User1Id == Guid.Parse(_userManager.GetUserId(User)) && u.User2Id == Guid.Parse(ReportAnimal.AdderId))
+            var conversation = _context.Conversations
+                .FirstOrDefault(u => (u.User1Id == Guid.Parse(_userManager.GetUserId(User)) && u.User2Id == Guid.Parse(ReportAnimal.AdderId))
                 || (u.User1Id == Guid.Parse(ReportAnimal.AdderId) && u.User2Id == Guid.Parse(_userManager.GetUserId(User))));
 
-            if(conversation == null)
+            if (conversation == null)
             {
                 Conversation newConversation = new Conversation
                 {
