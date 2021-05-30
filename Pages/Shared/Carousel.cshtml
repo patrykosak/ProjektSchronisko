@@ -1,0 +1,75 @@
+﻿<div class="row carousel-holder marginTop1">
+    <div class="col-md-12">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="/Animals/Index">
+                    <img class="slide-image" src="~/Images/carousel1.jpg" alt="">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="/Reports/ReportAboutLossOfPet">
+                        <img class="slide-image" src="~/Images/carousel2.jpg" alt="">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="/Identity/Account/Register">
+                        <img class="slide-image" src="~/Images/carousel3.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+@*
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="6000">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            @{
+                for (int i = 1; i <= 20; i++)
+                {
+                    <div class="carousel-@(i == 1 ? "item active" : "item")">
+                        <img class="d-block w-100" src="~/images/carousel@(i.ToString()).jpg" alt="title">
+                        <div class="carousel-caption d-none d-md-block">
+                            Some Caption Text
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>*@
