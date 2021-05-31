@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ProjektSchronisko.AppData;
+using ProjektSchronisko.Data;
 using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.WorkHoursAndDays
@@ -14,18 +17,27 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
-
-        public IndexModel(ProjektSchronisko.AppData.AnimalsContext context)
+        private readonly AnimalsContext _animalContext;
+        private readonly UserManager<IdentityUser> _userManager;
+        public IndexModel(AnimalsContext animalContext,
+            UserManager<IdentityUser> userManager)
         {
-            _context = context;
+            _animalContext = animalContext;
+            _userManager = userManager;
         }
 
+        public Guid VolunteerId { get; private set; }
         public IList<WorkHours> WorkHours { get;set; }
 
         public async Task OnGetAsync()
         {
-            WorkHours = await _context.WorkHours.ToListAsync();
+            VolunteerId = Guid.Parse(_userManager.GetUserId(User));
+
+            var query = from a in _animalContext.WorkHours
+                        orderby a.From descending
+                        select a;
+
+            WorkHours = await query.ToListAsync();
         }
     }
 }

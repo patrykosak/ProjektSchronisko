@@ -23,13 +23,15 @@
                 @Html.DisplayNameFor(model => model.WorkHours[0].To)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WorkHours[0].VolonteerId)
+                <span>Czy to Twoja zmiana</span>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.WorkHours) {
+
+        bool ItIsYourShift = item.VolonteerId == Model.VolunteerId;
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.From)
@@ -37,14 +39,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.To)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolonteerId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            @if(ItIsYourShift) {
+                <td>
+                    <span style="color:forestgreen;">TAK</span>
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            } else {
+                <td>
+                    <span style="color:crimson">NIE</span>
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            }
         </tr>
 }
     </tbody>
