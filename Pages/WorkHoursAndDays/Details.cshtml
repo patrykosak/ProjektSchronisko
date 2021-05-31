@@ -5,10 +5,14 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Szczegóły terminu</h1>
 
 <div>
-    <h4>WorkHours</h4>
+    @if(Model.ItIsYourShift) {
+        <h4 style="color:forestgreen">Dzięki takim jak Ty zwierzaki nie zostają same!</h4>
+    } else {
+<h4 style="color:forestgreen">Jeśli interesuje Cię ten termin, wpisz się  <a asp-page="./Create">tutaj!</a></h4>
+    }
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -24,14 +28,22 @@
             @Html.DisplayFor(model => model.WorkHours.To)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkHours.VolonteerId)
+            <span>Czy to Twoja zmiana</span>
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.WorkHours.VolonteerId)
+            @if(Model.ItIsYourShift) {
+                <span style="color:forestgreen">TAK</span>
+            } else {
+                <span style="color:crimson">NIE</span>
+            }
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.WorkHours.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
+    @if(Model.ItIsYourShift) {
+        <a asp-page="./Edit" asp-route-id="@Model.WorkHours.Id">Edytuj termin </a> <b>|</b>
+        <a asp-page="./Delete" asp-route-id="@Model.WorkHours.Id">Usuń całkowicie</a> <b>|</b>
+    }
+    <a asp-page="./Index">Powróć do listy terminów</a>
 </div>

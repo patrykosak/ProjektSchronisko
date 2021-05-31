@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,14 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
     [Authorize]
     public class DeleteModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
+        private readonly AnimalsContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public DeleteModel(ProjektSchronisko.AppData.AnimalsContext context)
+        public DeleteModel(AnimalsContext context,
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -33,10 +37,14 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
 
             WorkHours = await _context.WorkHours.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (WorkHours == null)
-            {
+            if (WorkHours == null){
                 return NotFound();
             }
+
+            if(!(WorkHours.VolonteerId == Guid.Parse(_userManager.GetUserId(User)))) {
+                return Forbid();
+            }
+
             return Page();
         }
 

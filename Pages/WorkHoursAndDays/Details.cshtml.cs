@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,16 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
     [Authorize]
     public class DetailsModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
+        private readonly AnimalsContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public DetailsModel(ProjektSchronisko.AppData.AnimalsContext context)
+        public DetailsModel(AnimalsContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-
+        public Guid VolunteerId { get; private set; }
+        public bool ItIsYourShift { get; private set; }
         public WorkHours WorkHours { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
@@ -31,6 +35,8 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
             }
 
             WorkHours = await _context.WorkHours.FirstOrDefaultAsync(m => m.Id == id);
+
+            ItIsYourShift = Guid.Parse(_userManager.GetUserId(User)) == WorkHours.VolonteerId;
 
             if (WorkHours == null)
             {

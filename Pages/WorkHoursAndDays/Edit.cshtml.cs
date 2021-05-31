@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,11 +16,14 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
     [Authorize]
     public class EditModel : PageModel
     {
-        private readonly ProjektSchronisko.AppData.AnimalsContext _context;
+        private readonly AnimalsContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EditModel(ProjektSchronisko.AppData.AnimalsContext context)
+        public EditModel(AnimalsContext context,
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -37,6 +41,10 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
             if (WorkHours == null)
             {
                 return NotFound();
+            }
+
+            if(!(WorkHours.VolonteerId == Guid.Parse(_userManager.GetUserId(User)))) {
+                return Forbid();
             }
             return Page();
         }
