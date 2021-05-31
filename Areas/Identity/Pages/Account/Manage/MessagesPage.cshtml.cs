@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,11 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
+        [BindProperty]
+        [Required]
+        [MaxLength(1000)]
+        [Display(Name = "Wiadomoœæ")]
+        public string Message { get; set; }
         public IEnumerable<Message> Messages { get; set; }
         public Guid UserId { get; private set; }
 
@@ -53,14 +59,33 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
             if (id == null)
                 return NotFound();
 
-            if (!ModelState.IsValid)
-                return Page();
+            UserId = Guid.Parse(_userManager.GetUserId(User));
 
-            var conversation = await _context.Conversations.FirstOrDefaultAsync(c => c.Id == id);
+            var conversation = await _context.Conversations
+                .Include(m => m.Messages)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (conversation == null)
                 return NotFound();
 
-            
+            Messages = conversation.Messages
+                .OrderByDescending(m => m.AddDate);
+
+            if (!ModelState.IsValid)
+                return Page();
+
+            Message newMessage = new Message()
+            {
+                From = Guid.Parse(_userManager.GetUserId(User)),
+                AddDate = DateTime.Now,
+                MessageU = Message,
+                ConversationId = conversation.Id
+            };
+            await _context.Messages.AddAsync(newMessage);
+            await _context.SaveChangesAsync();
+
+            Messages = conversation.Messages
+                .OrderByDescending(m => m.AddDate);
 
             return Page();
         }

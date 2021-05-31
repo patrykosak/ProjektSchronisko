@@ -37,25 +37,20 @@ namespace ProjektSchronisko.Pages.Reports
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
-
+            
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
 
             if (ReportAnimal == null)
-            {
                 return NotFound();
-            }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (!_signInManager.IsSignedIn(User))
-            {
                 return Redirect("/Identity/Account/Login");
-            }
+            
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
             if (ReportAnimal == null)
                 return NotFound();
@@ -96,12 +91,7 @@ namespace ProjektSchronisko.Pages.Reports
                     ConversationId = conversation.Id
                 };
                 await _context.Messages.AddAsync(newMessage);
-
             }
-                
-
-            
-        
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./ReportAboutLossOfPet");

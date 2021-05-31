@@ -9,7 +9,7 @@ namespace ProjektSchronisko.Middleware
 {
     public static class ErrorHandlingMiddlewareExtension
     {
-        public static void ErrorHandlingMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder ErrorHandlingMiddleware(this IApplicationBuilder builder)
             => builder.UseMiddleware<ErrorHandlingMiddleware>();
     }
     public class ErrorHandlingMiddleware : IMiddleware
