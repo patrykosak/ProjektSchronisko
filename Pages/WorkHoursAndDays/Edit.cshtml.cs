@@ -35,7 +35,6 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
             {
                 return NotFound();
             }
-
             WorkHours = await _context.WorkHours.FirstOrDefaultAsync(m => m.Id == id);
 
             if (WorkHours == null)
@@ -57,7 +56,6 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
             {
                 return Page();
             }
-
             _context.Attach(WorkHours).State = EntityState.Modified;
 
             try
