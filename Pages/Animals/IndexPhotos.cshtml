@@ -2,11 +2,6 @@
 @model ProjektSchronisko.Pages.Animals.IndexPhotosModel
 @{
 }
-<style>
-    .btn {
-        width: 280px;
-    }
-</style>
 
 
 <p>
@@ -37,11 +32,11 @@
                     <h3>@animal.Name</h3>
                 </div>
 
-                <img class="card-img-top imageThumbnail" src="@photoPath"
+                <img class="card-img-top imageThumbnail" height="350" src="@photoPath"
                      asp-append-version="true" />
 
                 <div class="card-footer text-center">
-                    <a asp-page="./Details" asp-route-id="@animal.IdAnimal" class="btn btn-primary m-1">Szczegóły</a>
+                    <a asp-page="./Details" asp-route-id="@animal.IdAnimal" style="width:280px;"  class="btn btn-primary m-1">Szczegóły</a>
                 </div>
             </div>
         }
