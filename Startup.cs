@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using ProjektSchronisko.AppData;
 using ProjektSchronisko.Data;
 using ProjektSchronisko.Middleware;
 using ProjektSchronisko.Seeders;
+using ProjektSchronisko.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +48,10 @@ namespace ProjektSchronisko
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddRazorPages();
         }
 
