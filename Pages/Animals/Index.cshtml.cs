@@ -29,9 +29,9 @@ namespace ProjektSchronisko.Pages.Animals
         public TypeAnimal type { get; set; }
         public Age age { get; set; }
         public Race race { get; set; }
-        public Boolean Search { get; set; }
+        public bool Search { get; set; }
 
-        public async Task OnGetAsync(string sortOrder,TypeAnimal type, Age age, Race race, Boolean Search)
+        public async Task OnGetAsync(string sortOrder,TypeAnimal type, Age age, Race race, bool Search)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
