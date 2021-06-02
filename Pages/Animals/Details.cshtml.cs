@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using IronPdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using ProjektSchronisko.AppData;
 using ProjektSchronisko.Models;
@@ -35,6 +38,47 @@ namespace ProjektSchronisko.Pages.Animals
                 return NotFound();
             }
             return Page();
+        }
+
+        public IActionResult OnPost(Guid? id) {
+
+            if(id == null) {
+                return NotFound();
+            }
+
+            Animal = _context.Animals.FirstOrDefault(m => m.IdAnimal == id);
+
+            if(Animal == null) {
+                return NotFound();
+            }
+
+            CreatePdfExample();
+            var rootPath = Directory.GetCurrentDirectory();
+
+            string fileName = "Sample.pdf";
+
+            var filePath = $"{rootPath}/wwwroot/pdf/{fileName}";
+
+            var fileExists = System.IO.File.Exists(filePath);
+            if(!fileExists) {
+                return NotFound();
+            }
+            var contentProvider = new FileExtensionContentTypeProvider();
+            contentProvider.TryGetContentType(fileName, out string contentType);
+
+            var fileContents = System.IO.File.ReadAllBytes(filePath);
+            //
+            return File(fileContents, contentType, fileName);
+        }
+        void CreatePdfExample() {
+            var renderer = new HtmlToPdf();
+
+            // tworzymy prosty template oraz ścieżkę zapisu pliku
+            string template = "<h1>Nasz pierwszy NIEPDF</h1>";
+            string path = "wwwroot/pdf/Sample.pdf";
+
+            var PDF = renderer.RenderHtmlAsPdf(template);
+            PDF.SaveAs(path);
         }
     }
 }

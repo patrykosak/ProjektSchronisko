@@ -80,9 +80,9 @@
         </div>
 
         <div>
-            <a asp-page="./PdfMaker" asp-route-id="@Model.Animal.IdAnimal">
-                <button class="btn btn-primary">Pobierz informację w PDF</button> 
-            </a> 
+            <form method="post">
+                <button type="submit" class="btn btn-primary">Pobierz informację w PDF</button>
+            </form>
         </div>
 
         <div>
