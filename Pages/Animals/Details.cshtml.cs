@@ -73,13 +73,12 @@ namespace ProjektSchronisko.Pages.Animals
         }
         void CreatePdfExample(Animal AAnimal) {
             var renderer = new HtmlToPdf();
-
             // tworzymy prosty template oraz ścieżkę zapisu pliku
             string template = "<h1 style='text-align: center;'>Formularz adopcyjny zwierzęcia</h1> <br />"
-                + "<b>Imię zwierzęcia:</b> " + AAnimal.Name.ToString() + "<br />"
-                + "<b>Gatunek:</b> " + AAnimal.TypeAnimale.ToString() + "<br />"
-                + "<b>Rasa:</b> " + AAnimal.RaceAnimal + "<br />"
-                + "<b>Wiek:</b> " + AAnimal.AgeAnimal.ToString() + "<br /> <br />"
+                + "<b>Imię zwierzęcia:</b> " + AAnimal.Name + "<br />"
+                + "<b>Gatunek:</b> " + EnumExtensions.GetDisplayName(AAnimal.TypeAnimale) + "<br />"
+                + "<b>Rasa:</b> " + EnumExtensions.GetDisplayName(AAnimal.RaceAnimal) + "<br />"
+                + "<b>Wiek:</b> " + EnumExtensions.GetDisplayName(AAnimal.AgeAnimal) + "<br /> <br />"
                 + "<div style='text-align: center;' >§1</div> <br />"
                 + "1.Ilekroć zapisy niniejszej umowy odnoszą się do "
                 + "ustawy, rozumie się przez to Ustawę o ochronie zwierząt z dnia  21 sierpnia 1997 r. , oraz Ustawę o ochronie zwierząt wykorzystywanych do "

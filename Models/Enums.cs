@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace ProjektSchronisko.Models
 {
@@ -29,7 +30,7 @@ namespace ProjektSchronisko.Models
         Years2,
         [Display(Name = "3-4 lata")]
         Years3,
-        [Display(Name = "Starszy")]
+        [Display(Name = "5 lat lub starszy")]
         Older
 
     }
@@ -52,5 +53,17 @@ namespace ProjektSchronisko.Models
         LossOfPet,
         [Display(Name = "Błąkające zwierzę ")]
         WanderingPet
+    }
+
+
+
+public static class EnumExtensions {
+        public static string GetDisplayName(this Enum enumValue) {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetName();
+        }
     }
 }
