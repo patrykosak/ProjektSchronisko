@@ -10,20 +10,21 @@ namespace ProjektSchronisko.Models
     {
         [Key]
         public Guid IdReport { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Należy wybrać typ zgłoszenia!")]
         public TypeReport TypeReport { get; set; }
         public String AdderId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Należy podać miasto!")]
         [MaxLength(100)]
         [Display(Name = "Miasto")]
         public string City { get; set; }
+        [Required(ErrorMessage = "Należy podać ulicę!")]
         [MaxLength(100)]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 
         [Display(Name = "Data dodania")]
         public DateTime AddDate { get; set; }
-
+        [Required(ErrorMessage = "Proszę podać imię!")]
         [MaxLength(40)]
         [Display(Name = "Imię")]
         public string AnimalName { get; set; }

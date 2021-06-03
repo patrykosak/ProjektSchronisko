@@ -4,12 +4,10 @@
 }
 
 <style>
-    .btn {
-        
-    }
+
 </style>
 
-<h3 class="text-info pt-2 pb-3">One znalazły już kochający dom</h3>
+<h3 class="text-info pt-2 pb-3" style="text-align:center;">One znalazły już kochający dom.</h3>
 
 <div class="card-deck">
     @foreach (var animal in Model.Animals)
@@ -28,7 +26,7 @@
                 <h3>@animal.Name</h3>
             </div>
 
-            <img class="card-img-top imageThumbnail" src="@photoPath"
+            <img class="card-img-top imageThumbnail" style="height: 350px;" src="@photoPath"
                  asp-append-version="true" />
 
             <div class="card-footer text-center">
