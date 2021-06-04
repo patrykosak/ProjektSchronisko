@@ -85,7 +85,7 @@ namespace ProjektSchronisko.Pages.Animals
                 _context.Attach(Animal).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
-            return RedirectToPage("./Index");
+            return RedirectToPage("./ReportAboutLossOfPet");
         }
 
         private bool AnimalExists(Guid id)

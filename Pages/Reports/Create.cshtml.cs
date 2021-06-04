@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +13,8 @@ using ProjektSchronisko.AppData;
 using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.Reports
-{
+{   
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly AnimalsContext _context;
