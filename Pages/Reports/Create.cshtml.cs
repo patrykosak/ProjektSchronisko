@@ -47,7 +47,12 @@ namespace ProjektSchronisko.Pages.Reports
                 return Page();
             
             if (_signInManager.IsSignedIn(User))
+            {
                 ReportAnimal.AdderId = _userManager.GetUserId(User);
+                var user = await _userManager.GetUserAsync(User);
+                ReportAnimal.Email = await _userManager.GetEmailAsync(user);
+
+            }
             ReportAnimal.AddDate = DateTime.Now;
 
             if (Photo != null)

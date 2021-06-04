@@ -13,6 +13,8 @@ namespace ProjektSchronisko.Models
         [Required(ErrorMessage = "Należy wybrać typ zgłoszenia!")]
         public TypeReport TypeReport { get; set; }
         public String AdderId { get; set; }
+        [MaxLength(10000)]
+        public string Email { get; set; }
         [Required(ErrorMessage = "Należy podać miasto!")]
         [MaxLength(100)]
         [Display(Name = "Miasto")]
