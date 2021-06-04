@@ -18,6 +18,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
 
         public IEnumerable<Conversation> Conversations { get; set; }
         public string SearchTerm { get; set; }
+        public string Email { get; set; }
 
         public ConversationsPageModel(AnimalsContext context, UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager)
@@ -36,8 +37,8 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
                 Conversations = queryBase.OrderByDescending(u => u.AddDate).ToList();
             else
             {
-                // TO DO !!!!! (dodanie Emaila. i daty)
                 Conversations = queryBase
+                    .Where(e => e.Email1.ToLower().Contains(SearchTerm.ToLower()) || e.Email2.ToLower().Contains(SearchTerm.ToLower()))
                     .OrderByDescending(u => u.AddDate)
                     .ToList();
             }

@@ -4,7 +4,8 @@
     ViewData["Title"] = "Konwersacje";
     ViewData["ActivePage"] = ManageNavPages.ConversationsPage;
 }
-
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <div class="text-center">
     <h3 class="text-info pt-2 pb-3">Twoje konwersacje</h3>
 </div>
@@ -30,7 +31,12 @@
             <img class="card-img-top imageThumbnail" src="https://av.fotosik.pl/default-light.png"
                  asp-append-version="true" />
             <div class="card-header">
-                <h3>n</h3>
+                @{
+                    var user = await UserManager.GetUserAsync(User);
+                    var email = await UserManager.GetEmailAsync(user);
+                    var Email = conversation.Email1 == email ? conversation.Email2 : conversation.Email1;
+                }
+                <h3>@Email</h3>
             </div>
 
             <div class="card-footer text-center">

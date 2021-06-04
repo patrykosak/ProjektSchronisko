@@ -11,7 +11,11 @@ namespace ProjektSchronisko.Models
         [Key]
         public Guid Id { get; set; }
         public Guid User1Id { get; set; }
+        [MaxLength(10000)]
+        public string Email1 { get; set; }
         public Guid User2Id { get; set; }
+        [MaxLength(10000)]
+        public string Email2 { get; set; }
         public DateTime AddDate { get; set; }
 
 

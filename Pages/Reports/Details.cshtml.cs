@@ -25,6 +25,7 @@ namespace ProjektSchronisko.Pages.Reports
         [Display(Name = "Wiadomoœæ")]
         public string Message { get; set; }
         public ReportAnimal ReportAnimal { get; set; }
+        public TypeReport TypeReport { get; set; }
 
         public DetailsModel(AnimalsContext context, SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager)
@@ -40,6 +41,7 @@ namespace ProjektSchronisko.Pages.Reports
                 return NotFound();
             
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
+            ReportAnimal.TypeReport = TypeReport.LossOfPet;
 
             if (ReportAnimal == null)
                 return NotFound();
@@ -52,6 +54,8 @@ namespace ProjektSchronisko.Pages.Reports
                 return Redirect("/Identity/Account/Login");
             
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
+            ReportAnimal.TypeReport = TypeReport.LossOfPet;
+
             if (ReportAnimal == null)
                 return NotFound();
 
@@ -64,10 +68,13 @@ namespace ProjektSchronisko.Pages.Reports
 
             if (conversation == null)
             {
+                var user = await _userManager.GetUserAsync(User);
                 Conversation newConversation = new Conversation
                 {
                     User1Id = Guid.Parse(_userManager.GetUserId(User)),
+                    Email1 = await _userManager.GetEmailAsync(user),
                     User2Id = Guid.Parse(ReportAnimal.AdderId),
+                    Email2 = ReportAnimal.Email, 
                     AddDate = DateTime.Now,
                     Messages = new List<Message>()
                     {
