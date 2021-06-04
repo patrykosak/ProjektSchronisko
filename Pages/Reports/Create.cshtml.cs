@@ -13,7 +13,7 @@ using ProjektSchronisko.AppData;
 using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.Reports
-{
+{   
     [Authorize]
     public class CreateModel : PageModel
     {

@@ -11,6 +11,7 @@ namespace ProjektSchronisko.Models
         [Key]
         public Guid IdReport { get; set; }
         [Required(ErrorMessage = "Należy wybrać typ zgłoszenia!")]
+        [Display(Name = "Typ zgłoszenia")]
         public TypeReport TypeReport { get; set; }
         public String AdderId { get; set; }
         [MaxLength(10000)]
