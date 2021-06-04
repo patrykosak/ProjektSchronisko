@@ -45,6 +45,9 @@ namespace ProjektSchronisko.Pages.Reports
 
             if (ReportAnimal == null)
                 return NotFound();
+            if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                return Forbid();
+
             return Page();
         }
 
@@ -52,7 +55,10 @@ namespace ProjektSchronisko.Pages.Reports
         {
             if (!ModelState.IsValid)
                 return Page();
-            
+
+            if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                return Forbid();
+
             if (Photo != null)
             {
                 var FileUpload = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Photo.FileName);
@@ -65,7 +71,7 @@ namespace ProjektSchronisko.Pages.Reports
             _context.Attach(ReportAnimal).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./ReportAboutLossOfPet");
+            return RedirectToPage("./Reports");
         }
     }
 }

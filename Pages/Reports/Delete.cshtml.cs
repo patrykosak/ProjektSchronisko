@@ -43,6 +43,9 @@ namespace ProjektSchronisko.Pages.Reports
             {
                 return NotFound();
             }
+            if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                return Forbid();
+
             return Page();
         }
         public async Task<IActionResult> OnPostAsync(Guid? id)
@@ -51,16 +54,19 @@ namespace ProjektSchronisko.Pages.Reports
             {
                 return NotFound();
             }
-
+            
             ReportAnimal = await _context.ReportAnimal.FindAsync(id);
-
+                
             if (ReportAnimal != null)
             {
+                if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                    return Forbid();
+
                 _context.ReportAnimal.Remove(ReportAnimal);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./ReportAboutLossOfPet");
+            return RedirectToPage("./Reports");
         }
     }
 }

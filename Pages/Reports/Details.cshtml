@@ -35,6 +35,12 @@
             @Html.DisplayFor(model => model.ReportAnimal.TypeReport)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportAnimal.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReportAnimal.Email)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ReportAnimal.City)
         </dt>
         <dd class="col-sm-10">
@@ -78,9 +84,6 @@
     </div>
 </div>
 
-
-
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.ReportAnimal.IdReport">Edytuj</a> |
     <a asp-page="./ReportAboutLossOfPet">Wróć do zgłoszeń</a>
 </div>
