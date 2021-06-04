@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,6 +12,7 @@ using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.Reports
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
         private readonly AnimalsContext _context;
@@ -41,6 +43,9 @@ namespace ProjektSchronisko.Pages.Reports
             {
                 return NotFound();
             }
+            if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                return Forbid();
+
             return Page();
         }
         public async Task<IActionResult> OnPostAsync(Guid? id)
@@ -49,16 +54,19 @@ namespace ProjektSchronisko.Pages.Reports
             {
                 return NotFound();
             }
-
+            
             ReportAnimal = await _context.ReportAnimal.FindAsync(id);
-
+                
             if (ReportAnimal != null)
             {
+                if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                    return Forbid();
+
                 _context.ReportAnimal.Remove(ReportAnimal);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./ReportAboutLossOfPet");
+            return RedirectToPage("./Reports");
         }
     }
 }

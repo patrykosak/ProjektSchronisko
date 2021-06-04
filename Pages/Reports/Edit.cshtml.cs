@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.Reports
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly AnimalsContext _context;
@@ -43,6 +45,9 @@ namespace ProjektSchronisko.Pages.Reports
 
             if (ReportAnimal == null)
                 return NotFound();
+            if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                return Forbid();
+
             return Page();
         }
 
@@ -50,7 +55,10 @@ namespace ProjektSchronisko.Pages.Reports
         {
             if (!ModelState.IsValid)
                 return Page();
-            
+
+            if (ReportAnimal.AdderId != _userManager.GetUserId(User))
+                return Forbid();
+
             if (Photo != null)
             {
                 var FileUpload = Path.Combine(_webHostEnvironment.WebRootPath, "Images", Photo.FileName);
@@ -63,7 +71,7 @@ namespace ProjektSchronisko.Pages.Reports
             _context.Attach(ReportAnimal).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./ReportAboutLossOfPet");
+            return RedirectToPage("./Reports");
         }
     }
 }
