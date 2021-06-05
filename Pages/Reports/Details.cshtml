@@ -2,6 +2,7 @@
 @model ProjektSchronisko.Pages.Reports.DetailsModel
 @{
 }
+@using ProjektSchronisko.Models 
 
 <h1>Szczegóły</h1>
 
@@ -67,6 +68,12 @@
     </dl>
 </div>
 
+@{ 
+    var isShow = Model.ReportAnimal.TypeReport == TypeReport.LossOfPet ? true : false;
+}
+
+@if (Model.ReportAnimal.TypeReport == TypeReport.LossOfPet ? true : false)
+{
     <div class="row">
         <div class="col-md-4">
             <form method="post">
@@ -83,6 +90,7 @@
             </form>
         </div>
     </div>
+}
 
 
 

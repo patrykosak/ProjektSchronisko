@@ -25,7 +25,6 @@ namespace ProjektSchronisko.Pages.Reports
         [Display(Name = "Wiadomoœæ")]
         public string Message { get; set; }
         public ReportAnimal ReportAnimal { get; set; }
-        public TypeReport TypeReport { get; set; }
 
         public DetailsModel(AnimalsContext context, SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager)
@@ -41,7 +40,6 @@ namespace ProjektSchronisko.Pages.Reports
                 return NotFound();
             
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
-            ReportAnimal.TypeReport = TypeReport.LossOfPet;
 
             if (ReportAnimal == null)
                 return NotFound();
@@ -54,7 +52,6 @@ namespace ProjektSchronisko.Pages.Reports
                 return Redirect("/Identity/Account/Login");
             
             ReportAnimal = await _context.ReportAnimal.FirstOrDefaultAsync(m => m.IdReport == id);
-            ReportAnimal.TypeReport = TypeReport.LossOfPet;
 
             if (ReportAnimal == null)
                 return NotFound();
