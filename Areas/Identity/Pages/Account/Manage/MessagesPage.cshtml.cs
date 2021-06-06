@@ -20,7 +20,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account.Manage
 
         [BindProperty]
         [Required]
-        [MaxLength(1000)]
+        [MaxLength(40)]
         [Display(Name = "Wiadomoœæ")]
         public string Message { get; set; }
         public IEnumerable<Message> Messages { get; set; }
