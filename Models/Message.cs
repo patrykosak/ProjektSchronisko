@@ -12,7 +12,7 @@ namespace ProjektSchronisko.Models
         public Guid Id { get; set; }
         public Guid From { get; set; }
         [Required]
-        [MaxLength(1000)]
+        [MaxLength(31)]
         [Display(Name = "Wiadomość")]
         public string MessageU { get; set; }
         public DateTime AddDate { get; set; }
