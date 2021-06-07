@@ -25,13 +25,13 @@ namespace ProjektSchronisko.Pages.Animals
         public string DateSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
-        public IList<Animal> Animal { get;set; }
+        public IList<Animal> Animal { get; set; }
         public TypeAnimal type { get; set; }
         public Age age { get; set; }
         public Race race { get; set; }
         public bool Search { get; set; }
 
-        public async Task OnGetAsync(string sortOrder,TypeAnimal type, Age age, Race race, bool Search)
+        public async Task OnGetAsync(string sortOrder, TypeAnimal type, Age age, Race race, bool Search)
         {
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             TypeSort = sortOrder == "Type" ? "type_desc" : "Type";
@@ -39,7 +39,7 @@ namespace ProjektSchronisko.Pages.Animals
             RaceSort = sortOrder == "Race" ? "race_desc" : "Race";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
             IQueryable<Animal> animalIQ = from s in _context.Animals
-                                          where s.ifAdopted==false
+                                          where s.ifAdopted == false
                                           select s;
 
             switch (sortOrder)
@@ -75,7 +75,7 @@ namespace ProjektSchronisko.Pages.Animals
                     animalIQ = animalIQ.OrderBy(s => s.AddDate);
                     break;
             }
-                Animal = await animalIQ.AsNoTracking().ToListAsync();
+            Animal = await animalIQ.AsNoTracking().ToListAsync();
             if (Search)
             {
                 Animal = animalIQ.ToList().Where(e =>
@@ -84,6 +84,20 @@ namespace ProjektSchronisko.Pages.Animals
                 e.TypeAnimale.Equals(type)
                 ).ToList();
             }
+        }
+        public async Task OnPostAsync(TypeAnimal type, Age age, Race race, bool Search)
+        {
+            IQueryable<Animal> animalIQ = from s in _context.Animals
+                                          where s.ifAdopted == false
+                                          select s;
+            Animal = await animalIQ.AsNoTracking().ToListAsync();
+            
+                Animal = animalIQ.ToList().Where(e =>
+                e.AgeAnimal.Equals(age) &&
+                e.RaceAnimal.Equals(race) &&
+                e.TypeAnimale.Equals(type)
+                ).ToList();
+            Search = false;
         }
     }
 }
