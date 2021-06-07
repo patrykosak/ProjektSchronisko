@@ -27,36 +27,24 @@
     </div>
 </div>
 <hr>
-<div class="containerXD">
+<h3>Historia wiadomości</h3>
+    <div class="containerXD">
+        @foreach(var message in Model.Messages) {
+            if(message.From == Model.UserId) {
 
-    @foreach(var message in Model.Messages) {<hr>
-        if(message.From == Model.UserId) {
+                <div class="message-blueXD">
+                    <p class="message-contentXD">@Html.DisplayFor(model => message.MessageU)</p>
+                </div>
 
-            <div class="message-blueXD">
-                <p class="message-contentXD">@Html.DisplayFor(model => message.MessageU)</p>
-            </div>
+            } else {
 
-        } else {
-
-            <div class="message-orangeXD">
-                <p class="message-contentXD">@Html.DisplayFor(model => message.MessageU)</p>
-            </div>
+                <div class="message-orangeXD">
+                    <p class="message-contentXD">@Html.DisplayFor(model => message.MessageU)</p>
+                </div>
+            }
+            <hr>
         }
-    }
-</div>
+    </div>
 
-<style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-</style>
+    <style>
+    </style>
