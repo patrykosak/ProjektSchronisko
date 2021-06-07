@@ -43,7 +43,21 @@ namespace ProjektSchronisko.Models
         [Display(Name = "Inny")]
         Other,
         [Display(Name = "Border Collie")]
-        BorderCollie
+        BorderCollie,
+        Shiba,
+        Labrador,
+        Husky,
+        Buldog,
+        Rottweiler,
+        Greyhound,
+        [Display(Name = "Bengalski")]
+        Bengal,
+        [Display(Name = "Perski")]
+        Pers,
+        [Display(Name = "Dachowiec")]
+        Moggy
+
+
     }
     public enum TypeReport
     {
