@@ -11,8 +11,8 @@ namespace ProjektSchronisko.Models
         [Key]
         public Guid Id { get; set; }
         public Guid From { get; set; }
-        [Required]
-        [MaxLength(31)]
+        [Required(ErrorMessage = "Wiadomość może mieć maksymalnie 40 znaków!")]
+        [MaxLength(40)]
         [Display(Name = "Wiadomość")]
         public string MessageU { get; set; }
         public DateTime AddDate { get; set; }

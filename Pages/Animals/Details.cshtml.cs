@@ -83,7 +83,7 @@ namespace ProjektSchronisko.Pages.Animals
                 + "1.Ilekroć zapisy niniejszej umowy odnoszą się do "
                 + "ustawy, rozumie się przez to Ustawę o ochronie zwierząt z dnia  21 sierpnia 1997 r. , oraz Ustawę o ochronie zwierząt wykorzystywanych do "
                 + "celów naukowych lub edukacyjnych z dnia 15 stycznia 2015 r.z późniejszymi zmianami."
-                + "2.Niniejszy dokument jest zobowiązaniem adopcyjnym,000000000000000000000000 a nie umową kupna. <br /> <br />"
+                + "2.Niniejszy dokument jest zobowiązaniem adopcyjnym, a nie umową kupna. <br /> <br />"
                 + "<div style='text-align: center;' >§2</div> <br />"
                 + "1.Oddający do adopcji przekazuje zwierzę pod stałą opiekę adoptującego w dniu podpisania przez obie strony niniejszej umowy.<br />"
                 + "2.Zwierzę będzie przebywało pod adresem zamieszkania stałego(zameldowania) lub adresem pobytu tymczasowego adoptującego.<br />"
