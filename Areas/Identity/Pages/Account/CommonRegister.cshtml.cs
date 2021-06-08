@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,8 +18,7 @@ using ProjektSchronisko.Utility;
 
 namespace ProjektSchronisko.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class CommonRegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
@@ -27,8 +26,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _db;
-
-        public RegisterModel(
+        public CommonRegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
@@ -68,22 +66,8 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-       
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Surname { get; set; }
-        [Required]
-        public int Age { get; set; }
-        [Required]
-        public string Address { get; set; }
-        [Required]
-        public string City { get; set; }
-        [Required]
-        public string PostalCode { get; set; }
-        [Required]
-        public string PhoneNumber { get; set; }
         }
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -92,7 +76,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -100,8 +84,8 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(SD.Volunteer));
-                    await _userManager.AddToRoleAsync(user, SD.Volunteer);
+                    await _roleManager.CreateAsync(new IdentityRole(SD.User));
+                    await _userManager.AddToRoleAsync(user, SD.User);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
