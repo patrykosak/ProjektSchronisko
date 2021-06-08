@@ -11,7 +11,7 @@ using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.Animals
 {
-    [Authorize]
+    [Authorize(Roles = "Volunteer")]
     public class DeleteModel : PageModel
     {
         private readonly ProjektSchronisko.AppData.AnimalsContext _context;

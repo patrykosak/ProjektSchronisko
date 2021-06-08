@@ -11,7 +11,7 @@ using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.WorkHoursAndDays
 {
-    [Authorize]
+    [Authorize(Roles = "Volunteer")]
     public class IndexModel : PageModel
     {
         private readonly AnimalsContext _animalContext;

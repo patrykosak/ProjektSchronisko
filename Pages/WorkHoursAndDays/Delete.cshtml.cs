@@ -12,7 +12,7 @@ using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.WorkHoursAndDays
 {
-    [Authorize]
+    [Authorize(Roles = "Volunteer")]
     public class DeleteModel : PageModel
     {
         private readonly AnimalsContext _context;

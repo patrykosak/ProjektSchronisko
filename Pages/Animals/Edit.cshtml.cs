@@ -16,7 +16,7 @@ using ProjektSchronisko.Models;
 
 namespace ProjektSchronisko.Pages.Animals
 {
-    [Authorize]
+    [Authorize(Roles = "Volunteer")]
     public class EditModel : PageModel
     {
         private readonly AnimalsContext _context;
