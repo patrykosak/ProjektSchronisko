@@ -42,15 +42,15 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Pole email jest wymagane")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Pole hasło jest wymagane")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Pamiętasz mnie?")]
             public bool RememberMe { get; set; }
         }
 

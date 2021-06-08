@@ -78,12 +78,13 @@
                 </dd>
             </dl>
         </div>
-
+       @if (Model.Animal.ifAdopted == false) { 
         <div>
             <form method="post">
                 <button type="submit" class="btn btn-primary">Pobierz formularz adopcyjny</button>
             </form>
         </div>
+}
         <br />
         <div>
             <a asp-page="./Edit" asp-route-id="@Model.Animal.IdAnimal">Edytuj</a> |

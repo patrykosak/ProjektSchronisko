@@ -53,35 +53,35 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Pole email jest wymagane")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Pole hasło jest wymagane")]
+            [StringLength(100, ErrorMessage = "Hasło musi mieć minimum 6 znaków", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Potwierdź hasło")]
+            [Compare("Password", ErrorMessage = "Hasła muszą być takie same")]
             public string ConfirmPassword { get; set; }
        
-        [Required]
+        [Required(ErrorMessage = "Pole imie jest wymagane")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole nazwisko jest wymagane")]
         public string Surname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole wiek jest wymagane")]
         public int Age { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole adres jest wymagane")]
         public string Address { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole miasto jest wymagane")]
         public string City { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole kod pocztowy jest wymagane")]
         public string PostalCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Pole numer telefonu jest wymagane")]
         public string PhoneNumber { get; set; }
         }
         public async Task OnGetAsync(string returnUrl = null)
