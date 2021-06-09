@@ -27,10 +27,10 @@ And after it next command:
 
         Update-Database -Context AnimalsContext
 <h3>3. Run the project from Visual Studio 2019 </h3>
-<h3>4. Configure SendGrid user secrets for email working:</h3>  
+<h3>4. Configure SendGrid user secrets for email working</h3>  
 
         dotnet user-secrets set SendGridUser Zaadaptuj.pl
-And after it next command
+And after it next command:
 
         dotnet user-secrets set SendGridKey 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
 <h3>5. Enjoy the app!</h3>  
