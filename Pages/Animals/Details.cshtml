@@ -93,7 +93,7 @@
     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Volunteer") && !@Model.Animal.ifAdopted)
     {
         <a asp-page="./Edit" asp-route-id="@Model.Animal.IdAnimal">Edytuj</a>
+            
     }
-    |
     <a asp-page="./Index">Wróć do listy</a>
 </div>

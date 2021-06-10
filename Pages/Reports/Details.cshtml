@@ -21,7 +21,7 @@
         @{
             var photoPath = "~/Images/" + (Model.ReportAnimal.PhotoPath ?? "noimage.jpg");
         }
-        <img class="card-img-top imageThumbnail" src="@photoPath" width="350" height="350"
+        <img class="d-block w-100" src="@photoPath"
              asp-append-version="true" />
     </div>
     <hr />
