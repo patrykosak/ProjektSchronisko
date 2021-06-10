@@ -44,11 +44,17 @@ namespace ProjektSchronisko.Models
         Other,
         [Display(Name = "Border Collie")]
         BorderCollie,
+        [Display(Name = "Shiba")]
         Shiba,
+        [Display(Name = "Labrador")]
         Labrador,
+        [Display(Name = "Husky")]
         Husky,
+        [Display(Name = "Buldog")]
         Buldog,
+        [Display(Name = "Rottweiler")]
         Rottweiler,
+        [Display(Name = "Greyhound")]
         Greyhound,
         [Display(Name = "Bengalski")]
         Bengal,
