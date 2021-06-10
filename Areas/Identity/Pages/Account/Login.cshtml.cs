@@ -98,7 +98,7 @@ namespace ProjektSchronisko.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania");
                     return Page();
                 }
             }
