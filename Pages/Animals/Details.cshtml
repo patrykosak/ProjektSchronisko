@@ -4,11 +4,13 @@
 @{
     ViewData["Title"] = "Szczegóły";
 }
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <h1>Szczegóły</h1>
 @if (ViewData.Model.Animal.PhotoPath != null && ViewData.Model.Animal.PhotoPathURL != null)
 {
-    Model.ifShow=true;
+    Model.ifShow = true;
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
 
@@ -36,7 +38,7 @@
 
     </div>
 }
-@if(ViewData.Model.Animal.PhotoPath != null && Model.ifShow==false)
+@if (ViewData.Model.Animal.PhotoPath != null && Model.ifShow == false)
 {
     Model.ifShow = true;
     <div>
@@ -45,48 +47,53 @@
 }
 @if (ViewData.Model.Animal.PhotoPathURL != null && Model.ifShow == false)
 {
-<div>
-    <img class="d-block w-100" src="@Html.DisplayFor(model => model.Animal.PhotoPathURL)">
-</div>
-        }
-        <div>
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Animal.Name)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Animal.Name)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Animal.TypeAnimale)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Animal.TypeAnimale)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Animal.AgeAnimal)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Animal.AgeAnimal)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Animal.RaceAnimal)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Animal.RaceAnimal)
-                </dd>
-            </dl>
-        </div>
-       @if (Model.Animal.ifAdopted == false) { 
-        <div>
-            <form method="post">
-                <button type="submit" class="btn btn-primary">Pobierz formularz adopcyjny</button>
-            </form>
-        </div>
+    <div>
+        <img class="d-block w-100" src="@Html.DisplayFor(model => model.Animal.PhotoPathURL)">
+    </div>
 }
-        <br />
-        <div>
-            <a asp-page="./Edit" asp-route-id="@Model.Animal.IdAnimal">Edytuj</a> |
-            <a asp-page="./Index">Wróć do listy</a>
-        </div>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Animal.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Animal.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Animal.TypeAnimale)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Animal.TypeAnimale)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Animal.AgeAnimal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Animal.AgeAnimal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Animal.RaceAnimal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Animal.RaceAnimal)
+        </dd>
+    </dl>
+</div>
+@if (Model.Animal.ifAdopted == false)
+{
+    <div>
+        <form method="post">
+            <button type="submit" class="btn btn-primary">Pobierz formularz adopcyjny</button>
+        </form>
+    </div>
+}
+<br />
+<div>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Volunteer") && !@Model.Animal.ifAdopted)
+    {
+        <a asp-page="./Edit" asp-route-id="@Model.Animal.IdAnimal">Edytuj</a>
+    }
+    |
+    <a asp-page="./Index">Wróć do listy</a>
+</div>

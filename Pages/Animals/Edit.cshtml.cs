@@ -67,6 +67,7 @@ namespace ProjektSchronisko.Pages.Animals
                 _context.Attach(Animal).State = EntityState.Modified;
                 try
                 {
+                    Animal.AddDate = DateTime.Now;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -83,9 +84,10 @@ namespace ProjektSchronisko.Pages.Animals
             }
             else {
                 _context.Attach(Animal).State = EntityState.Modified;
+                Animal.AddDate = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
-            return RedirectToPage("./ReportAboutLossOfPet");
+            return RedirectToPage("./Index");
         }
 
         private bool AnimalExists(Guid id)
