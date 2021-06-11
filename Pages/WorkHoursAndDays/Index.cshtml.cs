@@ -31,7 +31,7 @@ namespace ProjektSchronisko.Pages.WorkHoursAndDays
             VolunteerId = Guid.Parse(_userManager.GetUserId(User));
 
             var query = from a in _animalContext.WorkHours
-                        orderby a.From descending
+                        orderby a.From 
                         select a;
 
             WorkHours = await query.ToListAsync();
