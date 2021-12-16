@@ -9,7 +9,7 @@
 
 <h3 class="text-info pt-2 pb-3" style="text-align:center;">One znalazły już kochający dom.</h3>
 
-<div class="card-deck">
+<div class="card-deck align-items-center">
     @foreach (var animal in Model.Animals)
     {
         var photoPath = "";
@@ -30,7 +30,7 @@
                  asp-append-version="true" />
 
             <div class="card-footer text-center">
-                <a asp-page="/Animals/Details" asp-route-id="@animal.IdAnimal" style="width: 280px;" class="btn btn-primary m-1">Szczegóły</a>
+                <a asp-page="/Animals/Details" asp-route-id="@animal.IdAnimal" style="width:100%;" class="btn btn-primary m-1">Szczegóły</a>
             </div>
         </div>
     }
